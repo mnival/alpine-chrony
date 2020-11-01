@@ -8,9 +8,10 @@ LABEL maintainer="Michael Nival <docker@mn-home.fr>" \
 RUN addgroup -g 110 -S chrony && \
 	adduser --system --gecos "Chrony daemon" --ingroup chrony --home /var/log/chrony/ chrony --uid 110
 
-RUN apk add --no-cache chrony
+RUN apk upgrade --no-cache --update && \
+	apk add --no-cache chrony
 
-ADD start-chrony.sh /usr/bin/
+ADD start-chrony.sh /usr/local/bin/
 
 ENV chronyconf.pool="pool.ntp.org iburst" \
 	chronyconf.initstepslew="10 pool.ntp.org" \
