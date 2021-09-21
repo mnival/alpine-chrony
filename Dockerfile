@@ -1,17 +1,24 @@
-FROM alpine
+FROM alpine:3.14.2
 
-LABEL maintainer="Michael Nival <docker@mn-home.fr>" \
-	name="alpine-chrony" \
-	description="Alpine with the package chrony" \
-	docker.cmd="docker run -d -p 123:123/udp --cap-add=SYS_TIME --name chrony mnival/alpine-chrony"
+# https://github.com/opencontainers/image-spec/blob/master/annotations.md
+LABEL org.opencontainers.image.authors="Michael Nival" \
+	org.opencontainers.image.url="https://github.com/mnival/alpine-chrony/" \
+	org.opencontainers.image.documentation="https://github.com/mnival/alpine-chrony/" \
+	org.opencontainers.image.source="https://github.com/mnival/alpine-chrony/" \
+	org.opencontainers.image.description="Alpine image with chrony"
 
-RUN addgroup -g 110 -S chrony && \
-	adduser --system --gecos "Chrony daemon" --ingroup chrony --home /var/log/chrony/ chrony --uid 110
+RUN set -ex; \
+  addgroup -g 110 -S chrony; \
+  adduser --system --gecos "Chrony daemon" --ingroup chrony --home /var/log/chrony/ chrony --uid 110
 
-RUN apk upgrade --no-cache --update && \
-	apk add --no-cache chrony
+RUN set -ex; \
+  apk upgrade --no-cache --update; \
+  apk add --no-cache chrony
 
-ADD start-chrony.sh /usr/local/bin/
+COPY start-chrony.sh /usr/local/bin/
+
+RUN set -ex; \
+  chmod u+x /usr/local/bin/start-chrony.sh
 
 ENV chronyconf.pool="pool.ntp.org iburst" \
 	chronyconf.initstepslew="10 pool.ntp.org" \
