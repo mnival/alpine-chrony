@@ -5,7 +5,7 @@ Configuration Docker with alpine and package : chrony
 
 Quick Start
 ===========
-    docker run -d -p 123:123/udp --cap-add=SYS_TIME --name chrony mnival/alpine-chrony
+    docker run -d -p 123:123/udp --cap-add=SYS_TIME --name chrony quay.io/mnival/alpine-chrony
 
 Interfaces
 ===========
