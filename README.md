@@ -1,7 +1,7 @@
 Docker debian-chrony
 ============
 
-Configuration Docker with alpine:latest and package : chrony
+Configuration Docker with alpine and package : chrony
 
 Quick Start
 ===========
@@ -24,4 +24,4 @@ Maintainer
 ==========
 
 Please submit all issues/suggestions/bugs via
-https://github.com/mnival/docker-chrony
+https://github.com/mnival/alpine-chrony
