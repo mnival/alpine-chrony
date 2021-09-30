@@ -20,11 +20,11 @@ COPY start-chrony.sh /usr/local/bin/
 RUN set -ex; \
   chmod u+x /usr/local/bin/start-chrony.sh
 
-ENV chronyconf.pool="pool.ntp.org iburst" \
-	chronyconf.initstepslew="10 pool.ntp.org" \
-	chronyconf.driftfile="/var/lib/chrony/chrony.drift" \
-	chronyconf.rtcsync= \
-	chronyconf.cmdport="0"
+ENV chronyconf_pool="pool.ntp.org iburst" \
+	chronyconf_initstepslew="10 pool.ntp.org" \
+	chronyconf_driftfile="/var/lib/chrony/chrony.drift" \
+	chronyconf_rtcsync= \
+	chronyconf_cmdport="0"
 
 HEALTHCHECK CMD chronyc tracking || exit 1
 
